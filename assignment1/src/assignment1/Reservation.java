@@ -1,5 +1,5 @@
 package assignment1;
-//not
+
 public abstract class Reservation {
 	private String clientName;
 
