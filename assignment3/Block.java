@@ -14,12 +14,9 @@ public class Block {
 
  private Block[] children; // {UR, UL, LL, LR}
 
- public static Random gen = new Random();//CHANGE LATER
+ public static Random gen = new Random();
 
 
- /*
-  * These two constructors are here for testing purposes.
-  */
  public Block() {
  }
 
@@ -47,28 +44,26 @@ public class Block {
   this.level = lvl;
   this.maxDepth = maxDepth;
   this.children = new Block[0];
-  this.color = null; //Might need to change this later.
+  this.color = null; 
 
   if (this.level < this.maxDepth) { //
    double randomNum = gen.nextDouble();
    if (randomNum < Math.exp(-0.25 * this.level)) {
-    //subdivide by the four blocks
     int newLevel = this.level + 1;
     this.children = new Block[4];
     this.children[0] = new Block(newLevel, maxDepth);
     this.children[1] = new Block(newLevel, maxDepth);
     this.children[2] = new Block(newLevel, maxDepth);
     this.children[3] = new Block(newLevel, maxDepth);
-    //I really hope this is what it is looking for
    } else {
     int randomColor = gen.nextInt(4);
     this.color = GameColors.BLOCK_COLORS[randomColor];
    }
-  } else { //I think IDK im not too sure
-   int randomColor = gen.nextInt(4); //upperbound - 1 array size three
+  } else { 
+   int randomColor = gen.nextInt(4);
    this.color = GameColors.BLOCK_COLORS[randomColor];
   }
- } // So we assign a color? No clue
+ } 
 
 
  /*
@@ -79,12 +74,10 @@ public class Block {
   *  The size is the height and width of the block. (xCoord, yCoord) are the
   *  coordinates of the top left corner of the block.
   */
- public void updateSizeAndPosition(int size, int xCoord, int yCoord) { //need to do for the other parts fo the method
-  if (size <= 0 || (size % 2 != 0 && this.level < this.maxDepth)) { //need to fix later
+ public void updateSizeAndPosition(int size, int xCoord, int yCoord) { 
+  if (size <= 0 || (size % 2 != 0 && this.level < this.maxDepth)) {
    throw new IllegalArgumentException("Size is not big enough");
-  } //there are definitely more lemme think note for tester
-
-  //this is what the code is supposed to do.
+  } 
   this.size = size;
   this.xCoord = xCoord;
   this.yCoord = yCoord;
@@ -97,7 +90,7 @@ public class Block {
     if(size % 2 != 0){
      throw new IllegalArgumentException("Not evenly divisible");
     }
-    //have to swap arrays, to make sure the code matches up with the size
+
     this.children[0].updateSizeAndPosition(halfSize, addedX, this.yCoord);
     this.children[1].updateSizeAndPosition(halfSize, this.xCoord, this.yCoord);
     this.children[2].updateSizeAndPosition(halfSize, this.xCoord, addedY);
@@ -120,15 +113,15 @@ public class Block {
   *
   * The order in which the blocks to draw appear in the list does NOT matter.
   */
- public ArrayList<BlockToDraw> getBlocksToDraw() { //Block game is not working
+ public ArrayList<BlockToDraw> getBlocksToDraw() { 
   ArrayList<BlockToDraw> drawingBlocks = new ArrayList<BlockToDraw>();
 
   if (this.children.length == 0) { //base case for the recursive call
    drawingBlocks.add(new BlockToDraw(this.color, this.xCoord, this.yCoord, this.size, 0)); //Colour
    drawingBlocks.add(new BlockToDraw(GameColors.FRAME_COLOR, this.xCoord, this.yCoord, this.size, 3)); //frame
-  } else { //I think adding a for-each fixes my [] issue
+  } else { 
    for (BlockToDraw drawingBlock : this.children[0].getBlocksToDraw()) {
-    drawingBlocks.add(drawingBlock); //we add everything, I wonder what else there is
+    drawingBlocks.add(drawingBlock); 
    }
    for (BlockToDraw drawingBlock : this.children[1].getBlocksToDraw()) {
     drawingBlocks.add(drawingBlock);
@@ -142,7 +135,7 @@ public class Block {
   }
 
   return drawingBlocks;
- }//really need to check this method lol
+ }
 
 
  /*
@@ -172,10 +165,7 @@ public class Block {
   */
  public Block getSelectedBlock(int x, int y, int lvl) {
   Block selectedBlock = this;
-  //need to return this
-  //DFS Post-Order, ad then keep checking F
 
-  //all three implemnetations of input validation
   if(lvl < this.level){
    throw new IllegalArgumentException("Level is wrong");
   }
@@ -183,15 +173,12 @@ public class Block {
    throw new IllegalArgumentException("Max Depth");
   }
   if(!(contains(x, y))){
-   return null;  //double check if this makes sense later
+   return null;  
   }
-  //we want to recursive call up until we reach the level
-  //base case
-  if(this.level == lvl && contains(x, y)){ //contains we are good THIS CONDITION
+
+  if(this.level == lvl && contains(x, y)){ 
    return this;
-  } //need to double check
-  //recursive step
-  //USE THE BLOODY ARRAY
+  } 
 
   for(Block children: this.children){
    selectedBlock = children.getSelectedBlock(x, y, lvl);
@@ -200,11 +187,9 @@ public class Block {
    }
   }
 
-  //figure out this remaining i
-//needs to check if the blocks contain this thing maybe having a contain helper would work
-  return selectedBlock; //was calling null all the time so swapping the call work.
+  return selectedBlock; 
  }
- private boolean contains(int x, int y){ //right accross makes everything cleaner
+ private boolean contains(int x, int y){
   if((x >= this.xCoord && x < this.xCoord + this.size && y >= this.yCoord && y < this.yCoord + this.size)){
    return true;
   } else {
@@ -233,7 +218,6 @@ public class Block {
   if(this.children.length == 0){
    return;
   }
-  //Used two helpers to basically change everything
   if(direction == 0){ //x-axis
    this.reflectX(this.size, this.xCoord, this.yCoord);
    this.updateSizeAndPosition(this.size, this.xCoord, this.yCoord);
@@ -277,7 +261,7 @@ public class Block {
    }
   }
  }
- private void reflectY(int size, int xCoord, int yCoord) { //need to do for the other parts fo the method
+ private void reflectY(int size, int xCoord, int yCoord) {
 
   this.size = size;
   this.xCoord = xCoord;
@@ -329,7 +313,7 @@ public class Block {
    this.updateSizeAndPosition(this.size, this.xCoord, this.yCoord);
   }
  }
- private void rotateCCW(int size, int xCoord, int yCoord) { //need to do for the other parts fo the method
+ private void rotateCCW(int size, int xCoord, int yCoord) { 
 
   this.size = size;
   this.xCoord = xCoord;
@@ -355,7 +339,7 @@ public class Block {
    }
   }
  }
- private void rotateCW(int size, int xCoord, int yCoord) { //need to do for the other parts fo the method
+ private void rotateCW(int size, int xCoord, int yCoord) { 
 
   this.size = size;
   this.xCoord = xCoord;
@@ -431,7 +415,7 @@ public class Block {
  }
 
  private Color[][] flattenRecursion(Color[][] array, int updatedSize){
-  //I think recursion works must update the size properly
+
   int sizeUpdated =  this.size / updatedSize;
   int xUpdate = this.xCoord / updatedSize;
   int yUpdate = this.yCoord / updatedSize;
@@ -443,7 +427,7 @@ public class Block {
      array[i + yUpdate][n + xUpdate] = this.color;
     }
    }
-//now lets call the Rehaiorae
+
   } else{
    for(Block children: this.children){
     children.flattenRecursion(array, updatedSize);
