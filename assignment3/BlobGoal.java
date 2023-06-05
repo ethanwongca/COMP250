@@ -11,12 +11,12 @@ public class BlobGoal extends Goal{
 	@Override
 	public int score(Block board) {
 		int score = 0;
-		Color[][] colorArray = board.flatten(); //boolean should be the same size emulated the board
+		Color[][] colorArray = board.flatten(); 
 		boolean[][] booleanArray = new boolean[colorArray.length][colorArray.length];
 		for(int i = 0; i < colorArray.length; i++){
 			for(int n = 0; n < colorArray.length; n++){
 				int blobScore = undiscoveredBlobSize(i, n, colorArray, booleanArray);
-				if(score < blobScore){ //max val typical cs
+				if(score < blobScore){ 
 					score = blobScore;
 				}
 			}
@@ -32,13 +32,13 @@ public class BlobGoal extends Goal{
 
 
 	public int undiscoveredBlobSize(int i, int j, Color[][] unitCells, boolean[][] visited) {
-		int value = 0; //can't assume it is square, according to the tester data.
+		int value = 0; 
 
-		if(i < 0 || i >= unitCells.length || j < 0 || j >= unitCells[0].length){ //remove index out of bounds error right away
+		if(i < 0 || i >= unitCells.length || j < 0 || j >= unitCells[0].length){
 			return 0;
 		}
 
-		if(visited[i][j]){ //so we visit
+		if(visited[i][j]){ 
 			return 0;
 		}
 
@@ -47,7 +47,7 @@ public class BlobGoal extends Goal{
 			if(unitCells[i][j].equals(targetGoal)){
 				value++;
 			} else {
-				return 0; //get's rid of the value being one, not sure why though just did it because was getting 6 and it seemed viable
+				return 0; 
 			}
 
 		} else {
