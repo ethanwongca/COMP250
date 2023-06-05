@@ -1,13 +1,11 @@
 package assignment2;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-//add dummynodes somehow
 //March 20 Ver
 public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
 	private DNode head;
 	private DNode tail;
 
-	// do this in terms of dummy nodes
 	public void add(E elmnt) {
 		DNode node = new DNode();
 		node.element = elmnt;
@@ -61,8 +59,8 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
 	public void addFirst(E elmnt){
 		// create a new node then move the node
 		DNode node = new DNode();
-		node.element = elmnt; //set the new nodes elmnt
-		if (head == null){ //edgeCASE?????
+		node.element = elmnt;
+		if (head == null){ 
 			tail = node;
 			head = node;
 		} else {
@@ -79,8 +77,6 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
 		if (tail == null) {
 			head = node;
 			tail = node;
-			// if tail is null you can just add
-			//Look at slides and fix code but do not copy
 		} else {
 			tail.next = node;
 			node.prev = tail;
@@ -142,10 +138,10 @@ public class MyDoublyLinkedList<E> extends MyLinkedList<E> {
 		if (obj == null){ //always check null first in equals methods
 			return false;
 		}
-		if(!(obj instanceof MyDoublyLinkedList)){ //if it is not the instance of it can't beeeee
+		if(!(obj instanceof MyDoublyLinkedList)){ 
 			return false;
 		}
-		MyDoublyLinkedList<E> compareList = (MyDoublyLinkedList<E>) obj; //Now let's check :)
+		MyDoublyLinkedList<E> compareList = (MyDoublyLinkedList<E>) obj; 
 		if(this.size != compareList.size){
 			return false; //quicker run-time
 		}
