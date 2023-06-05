@@ -2,7 +2,7 @@ package assignment2;
 //March 20 Ver
 public class MyQueue<E>{
     private MyDoublyLinkedList<E> storage = new MyDoublyLinkedList<E>();
-    public MyQueue(){ //Intializes a new queue (HAVE TO CHECK LATER)
+    public MyQueue(){ 
 
     } //FIFO for doubly addLast(e) and removeFirst()
     public void enqueue(E elmnt){
@@ -25,8 +25,7 @@ public class MyQueue<E>{
             return false;
         }
         MyQueue<E> other = (MyQueue<E>) obj;
-        //fix later
-        return this.storage.equals(other.storage); //error here
+        return this.storage.equals(other.storage);
     }
 
 }
