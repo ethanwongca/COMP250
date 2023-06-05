@@ -1,4 +1,4 @@
-# COMP250-
+# COMP250
 Saved Material from COMP250 at McGill 
 
 <h2> Projects </h2>
