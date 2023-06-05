@@ -6,7 +6,7 @@ public class Hotel {
 
 	public Hotel(String hotelName, Room[] rooms) {
 		this.hotelName = hotelName;
-		// deep copy (MIGHT BE AN ERROR HERE)
+		// deep copy
 		this.rooms = new Room[rooms.length];
 		for(int i = 0; i < rooms.length; i++) {
 			this.rooms[i] = new Room(rooms[i]);
