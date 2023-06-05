@@ -11,8 +11,7 @@ public class TargetQueue extends MyQueue<Position>{
 
     }
     public void addTargets(String s) {
-        String num = "";
-        //start working on this when ed starts working
+        String num = "";g
         Boolean commaAllowed = false;
         Boolean rightAllowed = false;
         Boolean numAllowed = false;
@@ -24,7 +23,7 @@ public class TargetQueue extends MyQueue<Position>{
                 if (s.charAt(i) == '(' && num.equals("") && stack.isEmpty()) { //condition one stack and num empty
                     stack.push("(");
                     numAllowed = true;
-                    periodAllowed = false; //since it can start with period but not necessarily
+                    periodAllowed = false; 
                     leftAllowed = false;
                     continue;
                 }
@@ -61,9 +60,9 @@ public class TargetQueue extends MyQueue<Position>{
                         throw new IllegalArgumentException();
                     }
                     //check all three elements
-                    stack.pop(); // removes ,
+                    stack.pop(); 
                     this.enqueue(new Position(Integer.parseInt(stack.pop()), Integer.parseInt(num))); //removes num
-                    stack.clear(); //removes (
+                    stack.clear(); 
                     num = "";
                     numAllowed = false;
                     rightAllowed = false;
