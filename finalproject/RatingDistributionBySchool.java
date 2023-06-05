@@ -12,15 +12,12 @@ public class RatingDistributionBySchool extends DataAnalyzer {
 	public MyHashTable<String, Integer> getDistByKeyword(String keyword) {
 		String properKeyword = stringConverter(keyword);
 		MyHashTable<String, Integer> finalTable = (MyHashTable<String, Integer>) super.nestedHash.get(properKeyword);
-		// ADD YOUR CODE BELOW THIS
 		return finalTable;
-		//ADD YOUR CODE ABOVE THIS
 	}
 
 	@Override
 	public void extractInformation() {
 		MyHashTable<String, MyHashTable<String, Integer>> tempMap = new MyHashTable();
-		// ADD YOUR CODE BELOW THIS
 		int profIndex = super.parser.fields.get("professor_name");
 		int ratingIndex = super.parser.fields.get("student_star");
 		int schoolIndex = super.parser.fields.get("school_name");
@@ -42,7 +39,6 @@ public class RatingDistributionBySchool extends DataAnalyzer {
 			int total_rating = ratingCountMap.get("total_rating");
 			//Separate what I have
 			ratingCountMap.put("count", count + 1);
-			//multiplied by 30 cause I have to
 			ratingCountMap.put("total_rating", total_rating + (int) (ratingValue * 10000));
 		}
 
@@ -69,8 +65,6 @@ public class RatingDistributionBySchool extends DataAnalyzer {
 
 	}
 
-
-	//ADD YOUR CODE ABOVE THIS
 
 
 	private String stringConverter(String s){
