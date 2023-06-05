@@ -2,7 +2,6 @@ package assignment1;
 
 public class Basket {
 	//arrayList as we are adding or removing basket items
-	//inspired by the arrayList seen in class
 	private Reservation[] basket;
 	private int place;
 
@@ -21,18 +20,15 @@ public class Basket {
 	public boolean remove(Reservation reservation) {
 		for(int i = 0; i < place; i++) {
 			if(basket[i].equals(reservation)) {
-				// could be wrong check the placement afterwards
 				if(place == 1) {
 					place = 0;
 					this.basket = new Reservation[100];
 					return true;
 				}
-				//Something is wrong will debug later, logic does not make sense
 				while(i < place - 1) {
 					basket[i] = basket[i+1];
 					i++;
 				}
-				//error here it indicates -1 will be wrong
 				place -= 1;
 				return true;
 			}
@@ -44,7 +40,7 @@ public class Basket {
 		place = 0;
 		this.basket = new Reservation[100];
 	}
-	public int getNumOfReservations() { //Check this math
+	public int getNumOfReservations() { 
 		return place;
 	}
 	public int getTotalCost() {
