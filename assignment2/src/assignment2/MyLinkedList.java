@@ -8,7 +8,7 @@ public abstract class MyLinkedList<E> implements MyList<E> {
     public boolean isEmpty(){
         return size == 0;
     }
-    public abstract void add(E elmnt); //must fix later a little confused
+    public abstract void add(E elmnt); 
     public abstract void clear();
     public abstract E remove();
 
