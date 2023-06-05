@@ -2,7 +2,7 @@ package assignment2;
 //March 20 Ver
 public class MyStack<E> {
     private MyDoublyLinkedList<E> storage = new MyDoublyLinkedList<>();
-    public MyStack(){ //Intializes a new stack (HAVE TO CHECK LATER)
+    public MyStack(){
     } //LIFO for doubly addLast(e) and removeLast()
     public void push(E elmnt){
         storage.addLast(elmnt);
