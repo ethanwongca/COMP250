@@ -10,7 +10,6 @@ public class RatingByGender extends DataAnalyzer{
 
 	@Override
 	public MyHashTable<String, Integer> getDistByKeyword(String keyword) {
-		// ADD YOUR CODE BELOW THIS
 		//HashMap = rating HashMapTwo = difficulty
 		String properKeyword = stringConverter(keyword);
 		String[] updatedKeyword = properKeyword.trim().split(",");
@@ -27,13 +26,11 @@ public class RatingByGender extends DataAnalyzer{
 		} else {
 			return null;
 		}
-		//ADD YOUR CODE ABOVE THIS
 	}
 
 	@Override
 	public void extractInformation() {
-		// ADD YOUR CODE BELOW THIS
-		//The three fields we are comparing
+
 		int genderIndex = super.parser.fields.get("gender");
 		int difficultyIndex = super.parser.fields.get("student_difficult");
 		int ratingIndex = super.parser.fields.get("student_star");
@@ -61,7 +58,6 @@ public class RatingByGender extends DataAnalyzer{
 			difficultyTable.put(difficulty, tempDifficulty + 1);
 		}
 
-		//ADD YOUR CODE ABOVE THIS
 	}
 
 	private String stringConverter(String s){
