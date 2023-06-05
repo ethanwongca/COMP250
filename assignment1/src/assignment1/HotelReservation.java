@@ -12,7 +12,6 @@ public class HotelReservation extends Reservation{
 		this.hotel = hotel;
 		this.roomType = roomType;
 		this.numberNight = numberNight;
-		//Find if it is possible
 		this.priceOfRoom = hotel.reserveRoom(roomType);
 	}
 	public int getNumOfNights() {
