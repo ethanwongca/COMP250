@@ -8,7 +8,7 @@ public class Caterpillar extends MyDoublyLinkedList<Position>{
     public Position getHead(){
         return peekFirst();
     }
-    //It should say "orthogonally adjacent" for both methods! from eD
+    //It should say "orthogonally adjacent" for both methods! 
     public void eat(Position p){
         if(p.getX() < this.getHead().getX() - 1 || p.getX() > this.getHead().getX() + 1){
             throw new IllegalArgumentException("Not adjacent");
