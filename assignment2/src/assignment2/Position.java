@@ -3,7 +3,6 @@ package assignment2;
 public class Position {
     private int xCoord;
     private int yCoord;
-    //double check code later
     public Position(int xCoord, int yCoord){
         this.xCoord = xCoord;
         this.yCoord = yCoord;
@@ -13,18 +12,15 @@ public class Position {
         this.xCoord = p.xCoord;
         this.yCoord = p.yCoord;
     }
-    //IDK keep the this for reset maybe
     public void reset(int x , int y){
         this.xCoord = x;
         this.yCoord = y;
     }
-    //check if this is right next
     public void reset(Position p){
         this.xCoord = p.xCoord;
         this.yCoord = p.yCoord;
     }
 
-    //is it x - x nad y - y double check on the ed could be either or
     public static int getDistance(Position p1, Position p2){
         return Math.abs(p1.xCoord - p2.xCoord) + Math.abs(p1.yCoord - p2.yCoord);
     }
