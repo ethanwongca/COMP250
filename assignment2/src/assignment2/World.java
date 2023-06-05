@@ -9,29 +9,25 @@ public class World {
     private TargetQueue targetQueue; //food position
     private GameState gameState; //current game state
 
-    //gameState is not too bad to deal wiht so no need for extra lines with switch
     public World(TargetQueue targetQueue, ActionQueue actionQueue){
         //region 0,15 0,15 inclusive
         this.targetQueue = targetQueue;
         this.actionQueue = actionQueue;
         this.region = new Region(0, 0, 15, 15);
         this.caterpillar = new Caterpillar();
-        this.position = this.targetQueue.dequeue(); // also double check this as well
-        this.gameState = gameState.MOVE; //double check this enum usage
+        this.position = this.targetQueue.dequeue(); 
+        this.gameState = gameState.MOVE; 
     }
-    public void step(){ //NEED TO WORK ON THIS
+    public void step(){ 
         Direction temp;
-        //First, take the next heading direction from the ActionQueue. If the ActionQueue is
-        //empty, set the GameState to NO MORE ACTION.
         if(this.actionQueue.isEmpty()){
-            this.gameState = gameState.NO_MORE_ACTION; //change gamestate
+            this.gameState = gameState.NO_MORE_ACTION; 
         }
         if(this.gameState != gameState.EAT && this.gameState != gameState.MOVE){
             return;
         }
         temp = this.actionQueue.dequeue();
-        Position nextPosition = null; //sketchy code
-        //huge issue no dequeueing properly
+        Position nextPosition = null; 
         if(temp == Direction.NORTH){
             nextPosition = new Position( this.caterpillar.getHead().getX(), this.caterpillar.getHead().getY() - 1);
         } else if (temp == Direction.SOUTH){
@@ -53,7 +49,7 @@ public class World {
                 this.gameState = gameState.DONE;
             } else {
                 this.position = this.targetQueue.dequeue();
-                this.gameState = gameState.EAT; //do I increase caterpillar size
+                this.gameState = gameState.EAT; 
             }
         } else {
             caterpillar.move(nextPosition);
