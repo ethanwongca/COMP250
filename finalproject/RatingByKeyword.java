@@ -10,25 +10,17 @@ public class RatingByKeyword extends DataAnalyzer {
 
 	@Override
 	public MyHashTable<String, Integer> getDistByKeyword(String keyword) {
-		// ADD YOUR CODE BELOW THIS
-		//this function is just a look up
 		String properKeyword = stringConverter(keyword);
 		MyHashTable<String, Integer> finalTable = (MyHashTable<String, Integer>) super.nestedHash.get(properKeyword);
-		// ADD YOUR CODE BELOW THIS
 		return finalTable;
-		//ADD YOUR CODE ABOVE THIS
 	}
 
 	@Override
 	public void extractInformation() {
-		// ADD YOUR CODE BELOW THIS
-
-		//Two indexes we need data for
 		int ratingIndex = super.parser.fields.get("student_star");
 		int commentsIndex = super.parser.fields.get("comments");
 
 		for(int i = 0; i < super.parser.data.size(); i++) {
-			//Same non duplicate code portion like GenderbyKeyword
 			String comment = stringConverter(super.parser.data.get(i)[commentsIndex]);
 			comment = comment.replaceAll("[^a-z']+", " ");
 			String[] comments = comment.trim().split("\\s+");
@@ -36,7 +28,6 @@ public class RatingByKeyword extends DataAnalyzer {
 			String rating = String.valueOf((int) Double.parseDouble(super.parser.data.get(i)[ratingIndex]));
 			for(String token: tokens) {
 				if(!containsHashmap(super.nestedHash, token)) {
-					//if not prof in thehashmap must add
 					super.nestedHash.put(token, new MyHashTable<>(5));
 					MyHashTable<String, Integer> ratingsTable = (MyHashTable<String, Integer>) super.nestedHash.get(token);
 					for (int n = 1; n < 6; n++) {
@@ -48,7 +39,6 @@ public class RatingByKeyword extends DataAnalyzer {
 				ratingsTable.put(rating, tempRating + 1);
 			}
 		}
-		//ADD YOUR CODE ABOVE THIS
 	}
 
 	private String stringConverter(String s){
