@@ -17,26 +17,21 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>> {
 
 	// constructors
 	public MyHashTable() {
-		// ADD YOUR CODE BELOW THIS
-
 		this.size = 0;
 		this.capacity = 16;
 		this.buckets = new ArrayList<LinkedList<MyPair<K, V>>>();
 		for (int i = 0; i < this.capacity; i++) {
 			this.buckets.add(new LinkedList<MyPair<K, V>>());
 		}
-		//ADD YOUR CODE ABOVE THIS
 	}
 
 	public MyHashTable(int initialCapacity) {
-		// ADD YOUR CODE BELOW THIS
 		this.size = 0;
 		this.capacity = initialCapacity;
 		this.buckets = new ArrayList<LinkedList<MyPair<K, V>>>();
 		for (int i = 0; i < this.capacity; i++) {
 			this.buckets.add(new LinkedList<MyPair<K, V>>());
 		}
-		//ADD YOUR CODE ABOVE THIS
 	}
 
 	public int size() {
@@ -71,16 +66,12 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>> {
 	 * to this HashTable. Expected average run time  O(1)
 	 */
 	public V put(K key, V value) {
-		//  ADD YOUR CODE BELOW HERE
 		//like a chaining hash-map (lazy implementation)
 		int bucketIndex = hashFunction(key);
-
-		// if it is null there is no possible collision :)
 		LinkedList<MyPair<K, V>> bucket = this.buckets.get(bucketIndex);
 		for (MyPair<K, V> pairs : bucket) {
 			if (pairs != null) { //pair isn't null check
 				if (pairs.getKey().equals(key)) {
-					//note later: setter from myPairs, will set to new Pair() etc. if tester does not work
 					V oldValue = pairs.getValue();
 					pairs.setValue(value); //overwritting an old value with a new one
 					return oldValue;
@@ -90,13 +81,10 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>> {
 		//collision is necessary here
 		bucket.add(new MyPair(key, value));
 		this.size++;
-		if (this.size >= this.capacity * this.MAX_LOAD_FACTOR) { //just checkign is size and thereshold is bigger
+		if (this.size >= this.capacity * this.MAX_LOAD_FACTOR) { 
 			this.rehash();
 		}
-		return null; // return null since there is a cahnge
-
-
-		//  ADD YOUR CODE ABOVE HERE
+		return null; 
 
 	}
 
@@ -107,7 +95,6 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>> {
 	 */
 
 	public V get(K key) {
-		//ADD YOUR CODE BELOW HERE
 		int bucketIndex = hashFunction(key);
 		//chaining with hashmap methods, typically O(1) as each index shouldn't have many elements
 		//double check the vals later
@@ -121,16 +108,12 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>> {
 		}
 		return null;
 
-
-
-		//ADD YOUR CODE ABOVE HERE
 	}
 
 	/**
 	 * Remove the HashPair corresponding to key . Expected average runtime O(1)
 	 */
 	public V remove(K key) {
-		//ADD YOUR CODE BELOW HERE
 		//a key as input and removes from the table the entry
 		//similar to get method
 		int bucketIndex = hashFunction(key);
@@ -149,7 +132,6 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>> {
 		}
 		return null;
 
-		//ADD YOUR CODE ABOVE HERE
 	}
 
 
@@ -160,7 +142,6 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>> {
 	 * Expected average runtime is O(m), where m is the number of buckets
 	 */
 	public void rehash() {
-		//ADD YOUR CODE BELOW HERE DOUBLE CHECK IF RUN IN O(M) with the TA
 		ArrayList<LinkedList<MyPair<K,V>>> tempBuckets = this.buckets; //size and capcity temp is redundant
 		this.buckets = new ArrayList<LinkedList<MyPair<K,V>>>();
 		this.capacity = this.capacity * 2;
@@ -170,8 +151,8 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>> {
 		for(LinkedList<MyPair<K, V>> bucket: tempBuckets){ // running through the old lists O(n * m)
 			if(bucket != null){ //just an extra parameter since my implementation is lazy
 				for(MyPair<K, V> pair: bucket) {
-					if (pair != null) { //not sure if this is necessary just in case
-						int bucketIndex = hashFunction(pair.getKey()); //no need to add size since we kept it
+					if (pair != null) { 
+						int bucketIndex = hashFunction(pair.getKey()); 
 						LinkedList<MyPair<K,V>> linkedlist = this.buckets.get(bucketIndex);
 						linkedlist.add(pair);
 					}
@@ -180,7 +161,6 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>> {
 		}
 
 	}
-	//ADD YOUR CODE ABOVE HERE
 
 
 
@@ -190,7 +170,6 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>> {
 	 */
 
 	public ArrayList<K> getKeySet() {
-		//ADD YOUR CODE BELOW HERE
 		ArrayList<K> keySet = new ArrayList<K>();
 		//iterates through all the elements and place all the keys in each
 		for(LinkedList<MyPair<K, V>> bucket: this.buckets){
@@ -203,7 +182,6 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>> {
 			}
 		}
 		return keySet;
-		//ADD YOUR CODE ABOVE HERE
 	}
 
 	/**
@@ -211,7 +189,6 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>> {
 	 * Expected average runtime is O(m) where m is the number of buckets
 	 */
 	public ArrayList<V> getValueSet() {
-		//ADD CODE BELOW HERE
 		ArrayList<V> valueSet = new ArrayList<V>();
 
 		for(LinkedList<MyPair<K, V>> bucket: this.buckets){
@@ -231,7 +208,6 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>> {
 
 		return valueSet;
 
-		//ADD CODE ABOVE HERE
 	}
 
 
@@ -240,7 +216,6 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>> {
 	 * Expected average runtime is O(m) where m is the number of buckets
 	 */
 	public ArrayList<MyPair<K, V>> getEntries() {
-		//ADD CODE BELOW HERE
 		ArrayList<MyPair<K, V>> entries = new ArrayList<MyPair<K, V>>();
 		for(LinkedList<MyPair<K, V>> bucket: this.buckets){
 			if(bucket != null){
@@ -254,7 +229,6 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>> {
 		//I think this runs in O(m), since we assume the run of O(1) for data
 
 		return entries;
-		//ADD CODE ABOVE HERE
 	}
 
 
@@ -266,32 +240,24 @@ public class MyHashTable<K,V> implements Iterable<MyPair<K,V>> {
 
 
 	private class MyHashIterator implements Iterator<MyPair<K,V>> {
-		//might need to add extra parameters unfortunately.
 		private int indexEntries;
 		private ArrayList<MyPair<K, V>> entries;
 		private MyHashIterator() {
-			//ADD YOUR CODE BELOW HERE
 			this.indexEntries = 0;
 			this.entries = getEntries(); //might be an error here
-			//ADD YOUR CODE ABOVE HERE
 		}
 
 		@Override
 		public boolean hasNext() {
-			//ADD YOUR CODE BELOW HERe
 			return indexEntries < entries.size();
-			//ADD YOUR CODE ABOVE HERE
 		}
 
 		@Override
 		public MyPair<K,V> next() {
-			//ADD YOUR CODE BELOW HERE
 			if(this.hasNext()){
 				return entries.get(indexEntries ++);
 			}
 			return null;
-
-			//ADD YOUR CODE ABOVE HERE
 		}
 
 	}
